@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bke07i7swmu8m"]
+
+[ext_resource type="PackedScene" uid="uid://ch3o1fi1k10h3" path="res://Version1/Models/RoomB.fbx" id="1_56xa0"]
+
+[node name="Roomish" unique_id=2011706564 instance=ExtResource("1_56xa0")]
