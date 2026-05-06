@@ -116,3 +116,282 @@ func _process(_delta):
 		get_parent().visible = false
 	
 ```
+
+## BusUni
+
+```GDScript
+extends Area3D
+
+var player_inside = false 
+
+func _ready():
+	$"../../CanvasLayer/BusPrompt".visible = false
+	get_tree().root.find_child("Label3D", true, false).visible = true
+	
+func _on_body_entered(body):
+	if body.name == "CharacterBody3D":
+		player_inside = true
+		$"../../CanvasLayer/BusPrompt".visible = true
+		
+func _on_body_exited(body):
+	if body.name == "CharacterBody3D":
+		player_inside = false
+		$"../../CanvasLayer/BusPrompt".visible = false
+		
+func _process(_delta):
+	if player_inside and Input.is_action_just_pressed("busuni"):
+		get_tree().change_scene_to_file("res://Version2/Scenes/endscreen.tscn")
+```
+
+## character_body_3d
+
+```GDScript
+extends CharacterBody3D
+
+
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
+
+@onready var camera_pivot: Node3D = $CameraPivot
+var mouse_sensitivity := 0.002
+var pitch := 0.0
+
+var bob_time := 0.0
+var camera_base_pos: Vector3
+var walk_bob_intensity := 0.08
+var idle_bob_intensity := 0.02
+var bob_speed := 8.0
+
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	camera_base_pos = camera_pivot.position
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		pitch -= event.relative.y * mouse_sensitivity
+		pitch = clamp(pitch, deg_to_rad (-15), deg_to_rad(40))
+		camera_pivot.rotation.x = pitch
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+		var is_moving := Vector2(velocity.x, velocity.z).length() > 0.1
+		bob_time += delta * bob_speed
+		var bob_amount := 0.0
+		
+		if is_moving:
+			bob_amount = sin(bob_time) * walk_bob_intensity
+		else:
+			bob_amount = sin(bob_time) * idle_bob_intensity
+			
+			camera_pivot.position.y = camera_base_pos.y + bob_amount
+
+	move_and_slide()
+
+```
+
+## character_body_3d
+
+```GDScript
+extends Node2D
+
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file("res://Version2/Scenes/main_menu.tscn")
+
+```
+
+## Door
+
+```GDScript
+extends Area3D
+
+var player_inside = false
+@onready var door = get_parent()
+
+func _ready():
+	$"../../CanvasLayer/DoorPrompt".visible = false
+	door.visible = false
+
+func _on_body_entered(body):
+	if body.name == "CharacterBody3D":
+		player_inside = true
+		update_state()
+		
+func _on_body_exited(body):
+	if body.name == "CharacterBody3D":
+		player_inside = false
+		update_state()
+		
+func _process(_delta):
+	update_state()
+	
+	if player_inside and all_labels_green() and Input.is_action_just_pressed("exit_door"):
+		$"../DoorSound".play()
+		get_tree().change_scene_to_file("res://Version2/Scenes/outside.tscn")
+		
+func update_state():
+	var unlocked = all_labels_green()
+	
+	door.visible = unlocked 
+	$"../../CanvasLayer/DoorPrompt".visible = player_inside and unlocked
+		
+func all_labels_green() -> bool:
+	var label1 = get_tree().root.find_child("Label", true, false)
+	var label2 = get_tree().root.find_child("Label2", true, false)
+	var label3 = get_tree().root.find_child("Label3", true, false)
+	
+	if label1 == null or label2 == null or label3 == null:
+		return false
+	
+	return (
+		label1.get_theme_color("font_color") == Color.GREEN and
+		label2.get_theme_color("font_color") == Color.GREEN and
+		label3.get_theme_color("font_color") == Color.GREEN
+	)
+
+```
+
+## endscreen
+
+```GDScript
+extends Node2D
+
+@onready var image1 = $TextureRect
+@onready var image2 = $TextureRect2
+
+func _ready():
+	image1.visible = true
+	image2.visible = false
+	
+	while true:
+		await get_tree().create_timer(1.0).timeout
+		image1.visible = false
+		image2.visible = true
+		
+		await get_tree().create_timer(1.0).timeout
+		image1.visible = true
+		image2.visible = false
+
+```
+
+## Key
+
+```GDScript
+extends Area3D
+var player_inside = false
+var keys_grabbed = false 
+
+func _ready():
+	$"../../CanvasLayer/KeyPrompt".visible = false
+
+func _on_body_entered(body):
+	if body.name == "CharacterBody3D" and not keys_grabbed:
+		player_inside = true
+		$"../../CanvasLayer/KeyPrompt".visible = true
+		
+func _on_body_exited(body):
+	if body.name == "CharacterBody3D":
+		player_inside = false
+		$"../../CanvasLayer/KeyPrompt".visible = false
+		
+func _process(_delta):
+	if player_inside and Input.is_action_just_pressed("grab_keys"):
+		keys_grabbed = true 
+		$"../KeySound".play()
+		get_tree().root.find_child("Keys", true, false).visible = false
+		get_tree().root.find_child("Label2", true, false).add_theme_color_override("font_color", Color.GREEN)
+		$"../../CanvasLayer/KeyPrompt".visible = false
+		player_inside = false
+		monitoring = false
+
+```
+
+## main_menu
+
+```GDScript
+extends Node2D
+
+
+func _on_start_pressed() -> void:
+	get_tree().change_scene_to_file("res://Version2/Scenes/game_scene.tscn")
+
+
+func _on_credits_pressed() -> void:
+	get_tree().change_scene_to_file("res://Version2/Scenes/credits_probably.tscn")
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+```
+
+## panel
+
+```GDScript
+extends Panel
+
+func cross_off(task_number):
+	if task_number == 1:
+		$VBoxContainer/Label.add_theme_color_override("font_color", Color.GREEN)
+	elif task_number == 2:
+		$VBoxContainer/Label2.add_theme_color_override("font_color", Color.GREEN)
+	elif task_number == 3:
+		$VBoxContainer/Label3.add_theme_color_override("font_color", Color.GREEN)
+
+```
+
+## Wardrobe
+
+```GDScript
+extends Area3D
+var player_inside = false
+var keys_grabbed = false 
+
+func _ready():
+	$"../../CanvasLayer/WardrobePrompt".visible = false
+
+func _on_body_entered(body):
+	if body.name == "CharacterBody3D" and not keys_grabbed:
+		player_inside = true
+		$"../../CanvasLayer/WardrobePrompt".visible = true
+		
+func _on_body_exited(body):
+	if body.name == "CharacterBody3D":
+		player_inside = false
+		$"../../CanvasLayer/WardrobePrompt".visible = false
+		
+func _process(_delta):
+	if player_inside and Input.is_action_just_pressed("get_dressed"):
+		$WardrobeZone/WardrobeSound.play()
+		get_tree().root.find_child("Label3", true, false).add_theme_color_override("font_color", Color.GREEN)
+		$"../../CanvasLayer/WardrobePrompt".visible = false
+		player_inside = false	
+		monitoring = false
+
+```
+
+## character_body_3d
+
+```GDScript
+
+```
