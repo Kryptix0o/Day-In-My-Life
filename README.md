@@ -12,7 +12,8 @@ Class Group: TU984
 # Screenshots
 
 Titlescreen Image
-
+![Title](Images/title.png)
 2D Gameplay
-
+![Title](Images/2dimg.png)
 3D Gameplay
+![Title](Images/3dimg.png)
