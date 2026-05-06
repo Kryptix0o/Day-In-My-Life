@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c7bs8liehl508"]
+
+[ext_resource type="Texture2D" uid="uid://cfkuvetkmx1mk" path="res://Version2/UI/Credits.png" id="1_58l8r"]
+[ext_resource type="Script" uid="uid://cktfqwfs6esch" path="res://Version2/Scripts/credits_probably.gd" id="1_rplwi"]
+[ext_resource type="Texture2D" uid="uid://dp0jtv8u8ltac" path="res://Buttons/TextCredits.png" id="2_pfx4n"]
+[ext_resource type="Texture2D" uid="uid://bicefhb008os3" path="res://Buttons/Untitled(2).png" id="3_2dk7w"]
+[ext_resource type="Texture2D" uid="uid://cweku4r4crx2c" path="res://Buttons/Back1.png" id="5_nuc83"]
+[ext_resource type="Texture2D" uid="uid://mgvw83rt5quq" path="res://Buttons/BackRed.png" id="6_mnf55"]
+[ext_resource type="Texture2D" uid="uid://ldkapr7hfl3r" path="res://Buttons/Back2.png" id="7_d7c1a"]
+
+[node name="CreditsProbably" type="Node2D" unique_id=568919816]
+script = ExtResource("1_rplwi")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=809938174]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=351851721]
+position = Vector2(576, 322)
+scale = Vector2(0.8745417, 0.8892394)
+texture = ExtResource("1_58l8r")
+
+[node name="TextCredits" type="Sprite2D" parent="." unique_id=125673349]
+position = Vector2(580, 324)
+scale = Vector2(0.6052084, 0.6106481)
+texture = ExtResource("2_pfx4n")
+
+[node name="AllCredits" type="Sprite2D" parent="." unique_id=223780046]
+position = Vector2(578.00006, 326)
+scale = Vector2(0.6203703, 0.6203704)
+texture = ExtResource("3_2dk7w")
+
+[node name="Back" type="TextureButton" parent="." unique_id=69215487]
+offset_left = 950.0
+offset_top = 507.0
+offset_right = 1225.0
+offset_bottom = 707.0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("5_nuc83")
+texture_pressed = ExtResource("6_mnf55")
+texture_hover = ExtResource("7_d7c1a")
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

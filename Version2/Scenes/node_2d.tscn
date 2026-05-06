@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://txeyxitba73e"]
+
+[ext_resource type="PackedScene" uid="uid://c7bs8liehl508" path="res://Version2/Scenes/credits_probably.tscn" id="1_wtcfe"]
+
+[node name="Node2D" type="Node2D" unique_id=944217607]
+
+[node name="CreditsProbably" parent="." unique_id=568919816 instance=ExtResource("1_wtcfe")]

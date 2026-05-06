@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://43ei4fbk51ii"
+path="res://.godot/imported/Roomtest.obj-d672ed2d815c71f0199fdf011a3af04d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Roomtest.obj-d672ed2d815c71f0199fdf011a3af04d.mesh"]
+
+source_file="res://Version2/Models/Roomtest.obj"
+dest_files=["res://.godot/imported/Roomtest.obj-d672ed2d815c71f0199fdf011a3af04d.mesh", "res://.godot/imported/Roomtest.obj-d672ed2d815c71f0199fdf011a3af04d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
