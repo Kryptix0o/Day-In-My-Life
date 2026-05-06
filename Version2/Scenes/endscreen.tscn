@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://jp2bm2ab8bcb" path="res://Version2/Scenes/endscreen.gd" id="1_d58fs"]
 [ext_resource type="Texture2D" uid="uid://d0pml5bqjt2mb" path="res://Version2/UI/busscreen2.png" id="2_0fl43"]
 [ext_resource type="Texture2D" uid="uid://bditefw8hdsux" path="res://Version2/UI/busscreen1.png" id="3_bxjld"]
+[ext_resource type="AudioStream" uid="uid://clshdu7ms25q7" path="res://Version2/Sounds/Music/Kevin MacLeod_ Jaunty Gumption.mp3" id="4_ejipl"]
+[ext_resource type="AudioStream" uid="uid://wdss3ms3m8xo" path="res://Version2/Sounds/bussounds.mp3" id="5_smy76"]
 
 [node name="Node2D" type="Node2D" unique_id=739538373]
 script = ExtResource("1_d58fs")
@@ -44,3 +46,15 @@ texture = ExtResource("2_0fl43")
 offset_right = 1189.0321
 offset_bottom = 649.0
 texture = ExtResource("3_bxjld")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1944443262]
+stream = ExtResource("4_ejipl")
+volume_db = -12.636
+autoplay = true
+parameters/looping = true
+
+[node name="BusSounds" type="AudioStreamPlayer2D" parent="." unique_id=1849733926]
+stream = ExtResource("5_smy76")
+volume_db = -1.944
+autoplay = true
+parameters/looping = true

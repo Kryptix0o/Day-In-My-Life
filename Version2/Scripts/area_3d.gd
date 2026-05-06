@@ -18,6 +18,7 @@ func _on_body_exited(body):
 
 func _process(_delta):
 	if player_inside and Input.is_action_just_pressed("open_bag"):
+		$"../BagOpenSound".play()
 		$"../../CanvasLayer/BagMinigame".visible = true
 		$"../../CanvasLayer/BagPrompt".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

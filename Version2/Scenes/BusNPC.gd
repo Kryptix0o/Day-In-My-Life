@@ -18,6 +18,7 @@ func _on_body_exited(body):
 		
 func _process(_delta):
 	if player_inside and Input.is_action_just_pressed("busnpc"):
+		$"../BusSounds".play()
 		$"../../CanvasLayer/InteractPrompt".visible = false
 		player_inside = false
 		monitoring = false

@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://cd3nnrodwe78t" path="res://Version2/UI/busfinal.png" id="8_4udc5"]
 [ext_resource type="Script" uid="uid://ccirrnqqtoqtu" path="res://Version2/Scenes/BusNPC.gd" id="9_n7ds8"]
 [ext_resource type="Script" uid="uid://bwg5c4i36rkku" path="res://Version2/Scenes/BusUni.gd" id="10_og65y"]
+[ext_resource type="AudioStream" uid="uid://bf5bj55b33rj7" path="res://Version2/Sounds/Music/Kevin MacLeod_ Spazzmatica Polka.ogg" id="11_73lw3"]
+[ext_resource type="AudioStream" uid="uid://wdss3ms3m8xo" path="res://Version2/Sounds/bussounds.mp3" id="11_grgfd"]
+[ext_resource type="AudioStream" uid="uid://q8ouff2paunp" path="res://Version2/Sounds/door.mp3" id="12_cpwk7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dko5p"]
 albedo_texture = ExtResource("1_ti41x")
@@ -127,6 +130,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.595126, -0.21494168)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="CharacterBody3D" unique_id=605433266]
 environment = SubResource("Environment_bnd8s")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CharacterBody3D" unique_id=353986816]
+transform = Transform3D(-0.7936219, 0, 0.006787329, 0, 0.79365087, 0, -0.006787329, 0, -0.7936219, -0.038638957, 0.07217503, 4.5179367)
+stream = ExtResource("11_73lw3")
+volume_db = -21.982
+autoplay = true
+parameters/looping = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=114979101]
 transform = Transform3D(-0.9937055, 3.7018415e-09, 0.1120239, 0.037257932, 0.94307184, 0.33049563, -0.10564659, 0.33258912, -0.9371357, 1.0595512, 18.11246, -58.91924)
@@ -1320,6 +1330,9 @@ billboard = 1
 font_size = 109
 outline_size = 36
 
+[node name="BusSounds" type="AudioStreamPlayer3D" parent="BusNPC" unique_id=1269642019]
+stream = ExtResource("11_grgfd")
+
 [node name="BusNPC2" type="Sprite3D" parent="." unique_id=2012150634]
 transform = Transform3D(-3.395, 0, -5.126307e-07, 0, 3.395, 0, 5.126307e-07, 0, -3.395, 43.22746, 3.6089048, 77.718666)
 billboard = 1
@@ -1356,6 +1369,11 @@ offset_bottom = 642.0
 theme_override_font_sizes/font_size = 69
 text = "Press \"E\" to go to University"
 horizontal_alignment = 1
+
+[node name="DoorSound" type="AudioStreamPlayer3D" parent="." unique_id=2041217649]
+stream = ExtResource("12_cpwk7")
+volume_db = 7.477
+autoplay = true
 
 [connection signal="body_entered" from="BusNPC/Area3D" to="BusNPC/Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="BusNPC/Area3D" to="BusNPC/Area3D" method="_on_body_exited"]

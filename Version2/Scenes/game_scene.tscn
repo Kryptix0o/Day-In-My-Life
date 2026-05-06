@@ -20,8 +20,16 @@
 [ext_resource type="Script" uid="uid://hamkj343p2np" path="res://Version2/Scripts/area_3d.gd" id="13_mlphb"]
 [ext_resource type="Texture2D" uid="uid://cq43605x01mc1" path="res://Version2/UI/book.png" id="14_78j2m"]
 [ext_resource type="Script" uid="uid://dc14yynulll78" path="res://Version2/Scripts/Key.gd" id="15_7fru7"]
+[ext_resource type="AudioStream" uid="uid://ck6wnkewlq3sj" path="res://Version2/Sounds/minigameopen.mp3" id="15_q33ww"]
+[ext_resource type="AudioStream" uid="uid://cxp67pwhvvl7r" path="res://Version2/Sounds/clickobject.mp3" id="16_3vdgv"]
+[ext_resource type="AudioStream" uid="uid://12piys7jkech" path="res://Version2/Sounds/skyswitch.mp3" id="16_oujyt"]
+[ext_resource type="AudioStream" uid="uid://blhc41ps8ynmr" path="res://Version2/Sounds/iteminbag.mp3" id="17_oujyt"]
+[ext_resource type="AudioStream" uid="uid://d3nw0nd8d4e4e" path="res://Version2/Sounds/key.mp3" id="17_ydl0a"]
 [ext_resource type="Script" uid="uid://cdulsnswa6pma" path="res://Version2/Scenes/Wardrobe.gd" id="21_hnk2t"]
 [ext_resource type="Script" uid="uid://1osy0v4fexvi" path="res://Version2/Scenes/Door.gd" id="22_2mvd6"]
+[ext_resource type="AudioStream" uid="uid://c0oxm8mpc7kxg" path="res://Version2/Sounds/Music/Kevin MacLeod_ Cipher.ogg" id="23_j0h1h"]
+[ext_resource type="AudioStream" uid="uid://cq4j843s0ha1i" path="res://Version2/Sounds/clothes.mp3" id="24_vly3d"]
+[ext_resource type="AudioStream" uid="uid://q8ouff2paunp" path="res://Version2/Sounds/door.mp3" id="30_ixxkw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v1wow"]
 
@@ -147,6 +155,13 @@ shape = SubResource("CapsuleShape3D_v1wow")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivot" unique_id=1164803769]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.595126, -0.21494168)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CharacterBody3D" unique_id=1854424179]
+transform = Transform3D(-0.20541196, 0, -0.76660776, 0, 0.79365075, 0, 0.76660776, 0, -0.20541196, -2.879886, 0.7974045, -1.5714183)
+stream = ExtResource("23_j0h1h")
+volume_db = -26.916
+autoplay = true
+parameters/looping = true
 
 [node name="RoomHitbox" parent="." unique_id=495060041 instance=ExtResource("4_mixcd")]
 transform = Transform3D(4.5, 0, 0, 0, 4.9442725, 0, 0, 0, 4.5, 0, 2.4594269, 0)
@@ -333,6 +348,14 @@ offset_bottom = 171.0
 texture = ExtResource("13_1wc4g")
 expand_mode = 1
 
+[node name="ClickSound" type="AudioStreamPlayer3D" parent="CanvasLayer/BagMinigame" unique_id=1426720663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39658207, 3.5250533, 1.8576776)
+stream = ExtResource("16_3vdgv")
+
+[node name="InBagSound" type="AudioStreamPlayer3D" parent="CanvasLayer/BagMinigame" unique_id=566311250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39658207, 3.5250533, 1.8576776)
+stream = ExtResource("17_oujyt")
+
 [node name="WindowZone" type="Area3D" parent="." unique_id=456599885]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.513835, 4.4861875, -5.687302)
 script = ExtResource("10_miq82")
@@ -340,6 +363,10 @@ script = ExtResource("10_miq82")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WindowZone" unique_id=1055457956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.107177734, 0.44555664, 0.04272461)
 shape = SubResource("BoxShape3D_j5hk1")
+
+[node name="SkySwitchSound" type="AudioStreamPlayer3D" parent="WindowZone" unique_id=1764847544]
+stream = ExtResource("16_oujyt")
+volume_db = -31.402
 
 [node name="BagSprite" type="Sprite3D" parent="." unique_id=1359203525]
 transform = Transform3D(0.099999964, 0, 0, 0, 0.09000002, 0, 0, 0, 0.04850769, 0.40303588, 3.4097476, 2.0162246)
@@ -353,6 +380,10 @@ script = ExtResource("13_mlphb")
 transform = Transform3D(0.9999436, 0, 0, 0, 1, 0, 0, 0, 1, -0.064538, 1.2811737, -3.2684937)
 shape = SubResource("BoxShape3D_opqoc")
 
+[node name="BagOpenSound" type="AudioStreamPlayer3D" parent="BagSprite" unique_id=1609244494]
+transform = Transform3D(10.000003, 0, 0, 0, 11.111109, 0, 0, 0, 20.615288, -0.064538, 1.2811737, -3.2684937)
+stream = ExtResource("15_q33ww")
+
 [node name="Keys" type="Sprite3D" parent="." unique_id=713060458]
 transform = Transform3D(0.099999964, 0, 0, 0, 0.09000002, 0, 0, 0, 0.037832536, -3.8586636, 5.4473166, -3.510786)
 billboard = 1
@@ -364,6 +395,10 @@ script = ExtResource("15_7fru7")
 [node name="KeyZone" type="CollisionShape3D" parent="Keys/Area3D" unique_id=1432150514]
 transform = Transform3D(1, 0, 0, 0, 2.005802, 0, 0, 0, 12.800778, 5.546936, -1.6536713, 1.7329178)
 shape = SubResource("BoxShape3D_snaye")
+
+[node name="KeySound" type="AudioStreamPlayer3D" parent="Keys" unique_id=1619724835]
+transform = Transform3D(10.000004, 0, 0, 0, 11.11111, 0, 0, 0, 26.432278, 38.58665, -60.525734, 92.79807)
+stream = ExtResource("17_ydl0a")
 
 [node name="Houses" type="Node3D" parent="." unique_id=185609511]
 
@@ -640,6 +675,9 @@ script = ExtResource("21_hnk2t")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11987305, 1.2290802, 0.35564423)
 shape = SubResource("BoxShape3D_7fru7")
 
+[node name="WardrobeSound" type="AudioStreamPlayer3D" parent="Wardrobe/Area3D/WardrobeZone" unique_id=36712484]
+stream = ExtResource("24_vly3d")
+
 [node name="Door" type="Node3D" parent="." unique_id=1665395659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6440773, 2.7309365, 4.6006002)
 
@@ -649,6 +687,9 @@ script = ExtResource("22_2mvd6")
 [node name="DoorZone" type="CollisionShape3D" parent="Door/Area3D" unique_id=2005086246]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058288574, 1.3823853, -0.006164551)
 shape = SubResource("BoxShape3D_thyut")
+
+[node name="DoorSound" type="AudioStreamPlayer3D" parent="Door" unique_id=1887336599]
+stream = ExtResource("30_ixxkw")
 
 [connection signal="body_entered" from="WindowZone" to="WindowZone" method="_on_body_entered"]
 [connection signal="body_exited" from="WindowZone" to="WindowZone" method="_on_body_exited"]

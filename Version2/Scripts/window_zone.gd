@@ -17,5 +17,6 @@ func _on_body_exited(body):
 		
 func _process(_delta):
 	if player_inside and Input.is_action_just_pressed("change_sky"):
+		$SkySwitchSound.play()
 		var env = $"../WorldEnvironment".environment
 		(env.sky.sky_material as ProceduralSkyMaterial).sky_top_color = Color(randf(), randf(), randf())

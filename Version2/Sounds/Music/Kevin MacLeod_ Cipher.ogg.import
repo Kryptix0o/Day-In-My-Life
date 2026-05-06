@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c0oxm8mpc7kxg"
+path="res://.godot/imported/Kevin MacLeod_ Cipher.ogg-1f7399d903e3a05005c872955e6040b5.oggvorbisstr"
+
+[deps]
+
+source_file="res://Version2/Sounds/Music/Kevin MacLeod_ Cipher.ogg"
+dest_files=["res://.godot/imported/Kevin MacLeod_ Cipher.ogg-1f7399d903e3a05005c872955e6040b5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

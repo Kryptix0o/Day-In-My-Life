@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://qseoa60axvr3"
+path="res://.godot/imported/Kevin MacLeod_ Pixelland.ogg-ec33daeb51a9fb9ed349d7ac084aa53c.oggvorbisstr"
+
+[deps]
+
+source_file="res://Version2/Sounds/Music/Kevin MacLeod_ Pixelland.ogg"
+dest_files=["res://.godot/imported/Kevin MacLeod_ Pixelland.ogg-ec33daeb51a9fb9ed349d7ac084aa53c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

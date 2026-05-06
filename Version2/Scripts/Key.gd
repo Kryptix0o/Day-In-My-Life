@@ -18,6 +18,7 @@ func _on_body_exited(body):
 func _process(_delta):
 	if player_inside and Input.is_action_just_pressed("grab_keys"):
 		keys_grabbed = true 
+		$"../KeySound".play()
 		get_tree().root.find_child("Keys", true, false).visible = false
 		get_tree().root.find_child("Label2", true, false).add_theme_color_override("font_color", Color.GREEN)
 		$"../../CanvasLayer/KeyPrompt".visible = false

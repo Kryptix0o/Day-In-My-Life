@@ -5,6 +5,9 @@ var total_items = 4
 var dragging = null
 var drag_offset = Vector2()
 
+@onready var click_sound = $ClickSound
+@onready var item_in_bag_sound = $InBagSound
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
@@ -12,11 +15,13 @@ func _input(event):
 				if item.get_node("TextureRect").get_global_rect().has_point(event.position):
 					dragging = item
 					drag_offset = item.position - event.position
+					click_sound.play()
 		else: 
 			if dragging:
 				if $Bag.get_global_rect().has_point(event.position):
 					dragging.visible = false
 					items_in_bag += 1
+					item_in_bag_sound.play()
 					if items_in_bag >= total_items:
 						complete()
 			dragging = null

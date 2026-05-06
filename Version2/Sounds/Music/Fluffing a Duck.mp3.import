@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dlt0t4r70kq75"
+path="res://.godot/imported/Fluffing a Duck.mp3-9d7753e3b182d60c40362abcd8b06aab.mp3str"
+
+[deps]
+
+source_file="res://Version2/Sounds/Music/Fluffing a Duck.mp3"
+dest_files=["res://.godot/imported/Fluffing a Duck.mp3-9d7753e3b182d60c40362abcd8b06aab.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

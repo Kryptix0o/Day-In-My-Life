@@ -17,6 +17,7 @@ func _on_body_exited(body):
 		
 func _process(_delta):
 	if player_inside and Input.is_action_just_pressed("get_dressed"):
+		$WardrobeZone/WardrobeSound.play()
 		get_tree().root.find_child("Label3", true, false).add_theme_color_override("font_color", Color.GREEN)
 		$"../../CanvasLayer/WardrobePrompt".visible = false
 		player_inside = false	

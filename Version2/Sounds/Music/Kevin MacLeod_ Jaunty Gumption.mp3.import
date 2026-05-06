@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://clshdu7ms25q7"
+path="res://.godot/imported/Kevin MacLeod_ Jaunty Gumption.mp3-361f79fa2822638b002e9012c57c0844.mp3str"
+
+[deps]
+
+source_file="res://Version2/Sounds/Music/Kevin MacLeod_ Jaunty Gumption.mp3"
+dest_files=["res://.godot/imported/Kevin MacLeod_ Jaunty Gumption.mp3-361f79fa2822638b002e9012c57c0844.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
