@@ -6,7 +6,7 @@ Student Number: A00037886
 
 Class Group: TU984
 
-# Gameplay Demo
+# Gameplay Demo Video
 [![YouTube](thumb.png)](https://www.youtube.com/watch?v=6IOZ8FoUsBg)
 
 # Screenshots
