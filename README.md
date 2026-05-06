@@ -390,8 +390,103 @@ func _process(_delta):
 
 ```
 
-## character_body_3d
+## window_zone
 
 ```GDScript
+extends Area3D
 
+var player_inside = false
+
+func _ready():
+	$"../CanvasLayer/WindowPrompt".visible = false
+
+func _on_body_entered(body):
+	if body.name == "CharacterBody3D":
+		player_inside = true
+		$"../CanvasLayer/WindowPrompt".visible = true
+		
+func _on_body_exited(body):
+	if body.name == "CharacterBody3D":
+		player_inside = false
+		$"../CanvasLayer/WindowPrompt".visible = false
+		
+func _process(_delta):
+	if player_inside and Input.is_action_just_pressed("change_sky"):
+		$SkySwitchSound.play()
+		var env = $"../WorldEnvironment".environment
+		(env.sky.sky_material as ProceduralSkyMaterial).sky_top_color = Color(randf(), randf(), randf())
+
+```
+
+## area3d
+
+```GDScript
+extends Area3D
+
+var player_inside = false
+
+func _ready():
+	$"../../CanvasLayer/BagPrompt".visible = false
+	$"../../CanvasLayer/BagMinigame".visible = false
+
+func _on_body_entered(body):
+	if body.name == "CharacterBody3D":
+		player_inside = true
+		$"../../CanvasLayer/BagPrompt".visible = true
+		
+func _on_body_exited(body):
+	if body.name == "CharacterBody3D":
+		player_inside = false
+		$"../../CanvasLayer/BagPrompt".visible = false
+
+func _process(_delta):
+	if player_inside and Input.is_action_just_pressed("open_bag"):
+		$"../BagOpenSound".play()
+		$"../../CanvasLayer/BagMinigame".visible = true
+		$"../../CanvasLayer/BagPrompt".visible = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+```
+
+## bag_minigame
+
+```GDScript
+extends Control
+
+var items_in_bag = 0
+var total_items = 4
+var dragging = null
+var drag_offset = Vector2()
+
+@onready var click_sound = $ClickSound
+@onready var item_in_bag_sound = $InBagSound
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			for item in [$Laptop, $Bottle, $Book, $Charger]:
+				if item.get_node("TextureRect").get_global_rect().has_point(event.position):
+					dragging = item
+					drag_offset = item.position - event.position
+					click_sound.play()
+		else: 
+			if dragging:
+				if $Bag.get_global_rect().has_point(event.position):
+					dragging.visible = false
+					items_in_bag += 1
+					item_in_bag_sound.play()
+					if items_in_bag >= total_items:
+						complete()
+			dragging = null
+
+func _process(_delta):
+	if dragging:
+		dragging.position = get_viewport().get_mouse_position() + drag_offset
+		
+func complete():
+	visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	get_tree().root.find_child("Label", true, false).add_theme_color_override("font_color", Color.GREEN)
+	get_tree().root.find_child("BagZone", true, false).get_parent().monitoring = false
+	get_tree().root.find_child("BagPrompt", true, false).visible = false
+	get_tree().root.find_child("BagSprite", true, false).visible = false
 ```
